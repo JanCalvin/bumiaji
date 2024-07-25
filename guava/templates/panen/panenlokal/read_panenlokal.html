@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data Panen lokal</h1>
+    <a href="{% url 'create_panenlokal' %}"><button>Add Data</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal Panen</th> 
+                <th>Komoditas</th>
+                <th>Batch</th>
+                <th>Tanggal Kadaluwarsa</th>
+                <th>Kuantitas</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        {% for item in panenlokal %}
+        <tbody >
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.idpanen_lokal.tanggal_panen }}</td>
+                <td>{{ item.id_komoditas }}</td>
+                <td>{{ item.batch }}</td>
+                <td>{{ item.tanggal_kadaluwarsa }}</td>
+                <td>{{ item.kuantitas }}</td>
+                <td>
+                   <a href="{% url 'update_panenlokal' item.iddetailpanen_lokal %}"><button>Update</button></a>
+                   <a href="{% url 'delete_panenlokal' item.iddetailpanen_lokal %}"><button>Delete</button></a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

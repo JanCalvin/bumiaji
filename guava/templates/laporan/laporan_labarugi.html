@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="get">
+        <label for="bulan">Bulan</label>
+        <input type="month" value="{{bulan}}" name="bulan" id="bulan">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if bulan %}
+    <h3>Laporan Laba Rugi Bulan {{month}}</h3>
+
+    <table>
+        <tr>
+            <th  align="left">Pendapatan</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td>Penjualan</td>
+            <td>Rp{{pendapatan_awal}}</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Pendapatan lain</td>
+            <td>Rp-</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Total Pendapatan</td>
+            <td></td>
+            <td>Rp{{pendapatan_awal}}</td>
+
+        </tr>
+
+        <tr>
+            <th align="left">Harga Pokok Produksi</th>
+            <td></td>
+            <td>Rp{{hpproduksi}}</td>
+        </tr>
+
+        <tr>
+            <th  align="left">Harga Pokok Penjualan</th>
+            <td></td>
+            <td>Rp{{hppenjualan}}</td>
+        </tr>
+
+        <tr >
+            <td>Laba/Rugi</td>
+            <td></td>
+            <td>Rp{{laba_kotor}}</td>
+        </tr>
+        
+        <tr>
+            <th align="left">Beban Usaha</th>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for key,value in dictbbu.items %}
+        <tr>
+            <td>{{key}}</td>
+            <td>Rp{{value}}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <th  align="left">Total</th>
+            <th></th>
+            <td>Rp{{bbufix}}</td>
+        </tr>
+        
+        <tr>
+            <td>Laba Sebelum Pajak</td>
+            <td></td>
+            <td>Rp{{laba_kotor}}</td>
+        </tr>
+
+        <tr>
+            <td>Pajak Penghasilan</td>
+            <td>Rp{{pajak_penghasilan}}</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <th  align="left">Laba Bersih</th>
+            <td></td>
+            <td>Rp{{pendapatan_bersih}}</td>
+        </tr>
+    </table>
+    {% endif %}
+</body>
+</html>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

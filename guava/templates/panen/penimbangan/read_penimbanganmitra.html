@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Akumulasi</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Mitra</th>
+                <th>Komoditas</th>
+                <th>Tanggal Panen</th>
+                <th>Tanggal Kadaluwarsa</th>
+                <th>Kuantitas</th>
+            </tr>
+        </thead>
+        {% for item in penimbangan %}
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.idpanen_mitra__id_mitra__nama_mitra}}</td>
+                <td>{{item.id_komoditas__nama_komoditas}}</td>
+                <td>{{item.idpanen_mitra__tanggal_panen}}</td>
+                <td>{{item.tanggal_kadaluwarsa}}</td>
+                <td>{{item.kuantitas_total}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+</html>

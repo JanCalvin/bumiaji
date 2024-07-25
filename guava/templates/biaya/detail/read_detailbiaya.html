@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Detail Biaya</h1>
+    <td><a href="{% url 'create_detailbiaya' %}"><button>Create</button></a></td>
+    <table>
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Jenis Biaya</td>
+                <td>Nama Biaya</td>
+                <td>Tanggal</td>
+                <td>Nominal</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        {% for item in biayaobj %}
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.idjenisbiaya}}</td>
+                <td>{{item.nama_biaya}}</td>
+                <td>{{item.tanggal}}</td>
+                <td>{{item.nominal_biaya}}</td>
+                <td><a href="{% url 'update_detailbiaya' item.idbiaya %}"><button>Update</button></a></td>
+                <td><a href="{% url 'delete_detailbiaya' item.idbiaya %}"><button>delete</button></a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

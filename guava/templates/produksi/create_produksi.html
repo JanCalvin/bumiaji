@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add data</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2>Produksi</h2>
+        <label for="tanggal">Tanggal</label>
+        <input type="date" name="tanggal" id="tanggal" required>
+        <br>
+        <br>
+        <button type="button" onclick="tambahproduksi()">Tambah</button>
+        <div id="tambahdetail">
+            <div class="row">
+                 <h3>Detail Produksi 1</h3>
+                <label for="produk">Produk</label>
+                <select class="produk" name="produk" id="produk">
+                    {% for item in produkobj %}
+                    <option value="{{item.id_produk}}">{{item}}</option>
+                    {% endfor %}
+                </select>
+        
+                <label for="status_produk">Status Produk</label>
+                <input type="text" name="status_produk" id="status_produk" required>
+                
+        
+                <label for="kuantitas">Kuantitas</label>
+                <input type="number" name="kuantitas" id="kuantitas" required>
+                <button onclick="deleterow(this)">Delete</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function tambahproduksi() {
+
+            let angka = document.querySelectorAll('.produk').length +1;
+            const baris = document.createElement('div');
+            baris.className = 'row';
+            baris.innerHTML = `
+                <h3>Detail Produksi ${angka}</h3>
+                <label for="produk">Produk</label>
+                <select class="produk" name="produk" id="produk">
+                    {% for item in produkobj %}
+                    <option value="{{item.id_produk}}">{{item}}</option>
+                    {% endfor %}
+                </select>
+        
+                <label for="status_produk">Status Produk</label>
+                <input type="text" name="status_produk" id="status_produk" required>
+                
+        
+                <label for="kuantitas">Kuantitas</label>
+                <input type="number" name="kuantitas" id="kuantitas" required>
+                <button onclick="deleterow(this)">Delete</button>
+            `;
+            document.getElementById('tambahdetail').appendChild(baris);
+        }
+
+        function deleterow(button) {
+            button.closest('.row').remove();
+            updateRowNumbers();
+        }
+        
+        function updateRowNumbers() {
+        const rows = document.querySelectorAll('.row');
+        rows.forEach((row, index) => {
+            row.querySelector('h3').textContent = `Detail Panen Lokal ${index + 1}`;
+        });
+    }
+    </script>
+</body>
+</html>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

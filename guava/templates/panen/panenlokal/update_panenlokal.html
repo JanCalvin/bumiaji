@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Update Data</h1>
+    <a href="{% url 'read_panenlokal' %}"><button>Kembali</button></a>
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <label for="tanggal_panen">Tanggal Panen</label>
+        <input type="date" name="tanggal_panen" id="tanggal_panen" value="{{tanggal_panen}}" required>
+
+        <br>
+        <br>
+
+        <label for="komoditas">Komoditas</label>
+        <select name="komoditas" id="komoditas">
+            {% for item in allkomoditas %}
+            <option value="{{item.id_komoditas}}">{{item}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="batch">Batch</label>
+        <input type="number" name="batch" id="batch" value="{{getdetailobj.batch}}" required>
+        
+        <br>
+        <br>
+        
+        <label for="kadaluwarsa">Kadaluwarsa</label>
+        <input type="date" name="kadaluwarsa" id="kadaluwarsa" value="{{tanggal_kadaluwarsa}}" required>
+        
+        <label for="kuantitas">Kuantitas</label>
+        <input type="number" name="kuantitas" id="kuantitas" value="{{getdetailobj.kuantitas}}" required>
+        
+        <br>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

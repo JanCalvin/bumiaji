@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Update data</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="produk">Produk</label>
+        <select name="produk" id="produk">
+            {% for item in produkobj %}
+            {% if item.id_produk == getproduksi.id_produk.id_produk %}
+            <option selected value="{{item.id_produk}}">{{item}}</option>
+            {% else %}
+            <option value="{{item.id_produk}}">{{item}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="status_produk">Status Produk</label>
+        <input type="text" value="{{getproduksi.status_produk}}" name="status_produk" id="status_produk" required>
+        <br>
+        <br>
+        <label for="tanggal">Tanggal</label>
+        <input type="date" value="{{tanggal}}" name="tanggal" id="tanggal" required>
+
+        <label for="kuantitas">Kuantitas</label>
+        <input type="number"  value="{{getproduksi.kuantitas_produk}}" name="kuantitas" id="kuantitas" required>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

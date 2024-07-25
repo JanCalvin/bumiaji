@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data Produksi</h1>
+    <a href="{% url 'create_produksi' %}"><button>Add data</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Produk</th>
+                <th>Status Produk</th>
+                <th>Tanggal</th>
+                <th>Kuantitas</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for item in produksiobj %}
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{item.id_produk}}</td>
+                <td>{{item.status_produk}}</td>
+                <td>{{item.id_produksi.tanggal}}</td>
+                <td>{{item.kuantitas_produk}}</td>
+                <td><a href="{% url 'update_produksi' item.iddetail_produksi %}"><button>Update</button></a>
+                <td><a href="{% url 'delete_produksi' item.iddetail_produksi %}"><button>delete</button></a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}

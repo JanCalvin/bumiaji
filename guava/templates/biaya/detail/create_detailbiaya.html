@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Data</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="jenis_biaya">Jenis Biaya</label>
+        <select name="jenis_biaya" id="jenis_biaya">
+            {% for item in alljenisbiaya %}
+            <option value="{{item}}">{{item.jenis_biaya}}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="nama_biaya">Nama Biaya</label>
+        <input type="text" name="nama_biaya" id="nama_biaya" required><br><br>
+
+        <label for="tanggal">Tanggal</label>
+        <input type="date" name="tanggal" id="tanggal" required><br><br>
+
+        <label for="nominal_biaya">Nominal Biaya</label>
+        <input type="number" name="nominal_biaya" id="nominal_biaya" required>
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>

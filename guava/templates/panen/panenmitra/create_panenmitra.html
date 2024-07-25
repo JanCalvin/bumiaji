@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Data</h1>
+    <a href="{% url 'read_panenmitra' %}"><button>Kembali</button></a>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2>Panen Mitra</h2>
+        
+        <label for="nama_mitra">Nama Mitra</label>
+        <select name="nama_mitra" id="nama_mitra" required>
+            {% for item in filtermitra %}
+            <option value="{{item.id_mitra}}">{{item}}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="tanggal_panen">Tanggal Panen</label>
+        <input type="date" name="tanggal_panen" id="tanggal_panen" required>
+
+        <br>
+        <br>
+        <button type="button" onclick="tambahpanenmitra()">Tambah</button>
+        <div id="tambahdetail">
+            <div class="row">
+
+                <h3>Detail Panen Mitra 1</h3>
+                <label for="komoditas">Komoditas</label>
+                <select name="komoditas" id="komoditas">
+                    {% for item in allkomoditas %}
+                    <option value="{{item.id_komoditas}}">{{item}}</option>
+                    {% endfor %}
+                </select>
+        
+                <label for="batch">Batch</label>
+                <input type="number" name="batch" id="batch" required>
+                
+                <br>
+                <br>
+                
+                <label for="kadaluwarsa">Kadaluwarsa</label>
+                <input type="date" name="kadaluwarsa" id="kadaluwarsa" required>
+                
+                <label for="kuantitas">Kuantitas</label>
+                <input type="number" class="komoditas" name="kuantitas" id="kuantitas" required>
+                
+    
+                <button onclick="deleterow(this)">Delete</button>
+            </div>
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <script>
+        function tambahpanenmitra() {
+            let angka = document.querySelectorAll('.komoditas').length + 1;
+            const baris = document.createElement('div');
+            baris.className='row';
+            baris.innerHTML=`
+            <h3>Detail Panen Mitra ${angka}</h3>
+                <label for="komoditas">Komoditas</label>
+                <select name="komoditas" id="komoditas">
+                    {% for item in allkomoditas %}
+                    <option value="{{item.id_komoditas}}">{{item}}</option>
+                    {% endfor %}
+                </select>
+        
+                <label for="batch">Batch</label>
+                <input type="number" name="batch" id="batch" required>
+                
+                <br>
+                <br>
+                
+                <label for="kadaluwarsa">Kadaluwarsa</label>
+                <input type="date" name="kadaluwarsa" id="kadaluwarsa" required>
+                
+                <label for="kuantitas">Kuantitas</label>
+                <input type="number" class="komoditas" name="kuantitas" id="kuantitas" required>
+                
+               <button onclick="deleterow(this)">Delete</button>
+            `;
+            document.getElementById('tambahdetail').appendChild(baris)
+        }
+        function deleterow(button) {
+            button.closest('.row').remove();
+            updateRowNumbers();
+        }
+        
+        function updateRowNumbers() {
+        const rows = document.querySelectorAll('.row');
+        rows.forEach((row, index) => {
+            row.querySelector('h3').textContent = `Detail Panen Lokal ${index + 1}`;
+        });
+    }
+    </script>
+</body>
+</html>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
