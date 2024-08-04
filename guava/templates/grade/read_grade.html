@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Data Grade</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item "><a href="{% url 'read_grade' %}">Data Grade</a></li>
+          {% if is_owner %}
+          <li class="breadcrumb-item active " aria-current="page" ><a class="text-muted" href="{% url 'create_grade' %}">Create Grade</a></li>
+          {% endif %}
+        </ol>
+      </nav>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datagrade">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th >No</th>
+                                <th>Nama Grade</th>
+                                <th>Deskripsi</th>
+                                {% if is_owner %}
+                                <th>Action</th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody class="table-dark">
+                            {% for item in gradeobj %}
+                            <tr class="text-center">
+                                <td>{{forloop.counter}}</td>
+                                <td>{{item}}</td>
+                                <td>{{item.deskripsi_grade}}</td>
+                                {% if is_owner %}
+                                <td>
+                                    <a href="{% url 'update_grade' item.id_grade %}"><button class="btn btn-inverse-warning"><i class="mdi mdi-reload btn-icon-prepend align-middle"></i>Update</button></a>
+                
+                                    <a href="{% url 'delete_grade' item.id_grade %}"><button class="btn btn-inverse-danger"><i class="mdi mdi-close btn-icon-prepend align-middle"></i>Delete</button></a>
+                                </td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
