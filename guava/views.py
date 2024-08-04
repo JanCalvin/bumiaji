@@ -937,14 +937,21 @@ def laporan_penjualan(request) :
     mulai = request.GET.get('mulai')
     akhir = request.GET.get('akhir')
     # jenis_penjualan = request.GET.get('jenis_panen')
+
+
+    # disediain
     if mulai and akhir  :
+        # disediain
         mulai_date = datetime.strptime(mulai, "%Y-%m-%d")
         akhir_date = datetime.strptime(akhir, "%Y-%m-%d")
 
+        # disediain
         penjualanobj = models.penjualan.objects.filter(tanggal__range = (mulai,akhir)).order_by('tanggal')
         if not penjualanobj.exists() :
             messages.error(request, "Data Penjualan tidak ada!")
             return redirect('laporan_penjualan')
+        
+        # guidebook
         detailobjlokal = []
         listgrandtotal = []
         for item in penjualanobj :
@@ -979,7 +986,10 @@ def laporan_penjualan(request) :
         'akhir' :akhir_date,
     })
     else :
+        # disediain
         penjualanobj = models.penjualan.objects.all().order_by('tanggal')
+        
+        # guidebook
         detailobjlokal = []
         listgrandtotal = []
         for item in penjualanobj :
